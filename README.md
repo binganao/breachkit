@@ -16,7 +16,7 @@ Breachkit 对 Linux、MacOS、Windows 均提供了二进制可执行文件，前
 C:\Users\bingan\Desktop> breachkit.exe
 ```  
 
-[](breachkit.png)
+![](https://github.com/binganao/breachkit/blob/main/breachkit.png)
 
 ## 🐚 Options
 ```Bash
@@ -43,7 +43,7 @@ Breachkit 提供简单的POC编写方式，在此之前，需要在 Breachkit �
 
 > Breachkit 提供body、bodyor、bodyand、header、headeror、headerand、bodyheaderand七种验证逻辑，分别对返回包的头部和内容进行检测
 
-```json
+```python
 [
     {
         "Rank":"1",
