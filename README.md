@@ -1,1 +1,1 @@
-# Breachkit - 一款快速POC验证工具
+# Breachkit - 一个快速漏洞扫描工具
