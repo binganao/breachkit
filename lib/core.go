@@ -3,6 +3,7 @@ package lib
 import (
 	"bufio"
 	"flag"
+	"github.com/binganao/breachkit/config"
 	"github.com/binganao/breachkit/pkg/logger"
 	"os"
 	"os/exec"
@@ -19,12 +20,14 @@ var AliveHost chan ParseResult
 func Core() {
 	banner()
 	flag.Parse()
+	config.GetRule()
+
+	//fmt.Println(config.PocRules)
 
 	wg := &sync.WaitGroup{}
 	lock := &sync.Mutex{}
 
 	AliveHost = make(chan ParseResult, 10000000)
-	//PocHost = make(chan string, 10000000)
 
 	// show helps
 	if Target == "" && Targets == "" {
