@@ -16,7 +16,7 @@ Breachkit 对 Linux、MacOS、Windows 均提供了二进制可执行文件，前
 C:\Users\bingan\Desktop> breachkit.exe
 ```  
 
-![](https://github.com/binganao/breachkit/blob/main/breachkit.png)
+![](https://github.com/binganao/breachkit/blob/main/breachkit.png?raw=true)
 
 ## 🐚 Options
 ```Bash
