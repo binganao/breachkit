@@ -9,6 +9,7 @@ import (
 
 func veritypoc(host ParseResult) {
 	for _, poc := range config.PocRules {
+
 		var Response response
 
 		fl, _ := os.OpenFile(OutPut, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)

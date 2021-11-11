@@ -50,23 +50,12 @@ func Core() {
 		host := Parse(Target)
 		if NoIcmp == false {
 			logger.Info("Try to Connect the Target" + " [ " + logger.LightCyan(host.Ip) + " ] ")
-			wg.Add(1)
-			go func(host ParseResult) {
-				if PingHost(host.Ip, TimeOut) {
-					lock.Lock()
-					AliveHost <- host
-					logger.Success("Connect " + host.Ip + " Success!")
-					lock.Unlock()
-				} else {
-					lock.Lock()
-					logger.Failed(logger.Red("Connect " + host.Ip + " Failed!"))
-					lock.Unlock()
-				}
-				wg.Done()
-			}(host)
-			wg.Wait()
+			if PingHost(host.Ip, TimeOut) {
+				AliveHost <- host
+			}
 		} else {
-			logger.Warning("The hosts is set to live" + " [ " + logger.LightCyan(host.Ip) + " ] ")
+			AliveHost <- host
+			logger.Warning("The host is set to live" + " [ " + logger.LightCyan(host.Ip) + " ] ")
 		}
 	} else {
 		if NoIcmp == false {
@@ -77,11 +66,6 @@ func Core() {
 					if PingHost(host.Ip, TimeOut) {
 						lock.Lock()
 						AliveHost <- host
-						logger.Success("Connect " + host.Ip + " Success!")
-						lock.Unlock()
-					} else {
-						lock.Lock()
-						logger.Failed(logger.Red("Connect " + host.Ip + " Failed!"))
 						lock.Unlock()
 					}
 					wg.Done()
@@ -89,6 +73,7 @@ func Core() {
 			}
 			wg.Wait()
 		} else {
+			logger.Warning("All hosts is set to live")
 			for _, host := range GetHosts() {
 				AliveHost <- host
 			}
@@ -96,6 +81,9 @@ func Core() {
 	}
 
 	close(AliveHost)
+	if Targets != "" {
+		logger.Info("There are [" + strconv.Itoa(len(AliveHost)) + "/" + strconv.Itoa(len(GetHosts())) + "] hosts alive")
+	}
 
 	// vuln poc
 	logger.Info("Start vulnerability detection")
@@ -137,6 +125,7 @@ func GetHosts() []ParseResult {
 		}
 		Hosts = append(Hosts, Parse(strings.Replace(line, "\n", "", -1)))
 	}
+	return Hosts
 }
 
 func PingHost(host string, timeout int) bool {

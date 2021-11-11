@@ -48,12 +48,12 @@ func requests(method string, url string, headers map[string]string, body string)
 		req.Header.Set(key, value)
 	}
 
-	for key, value := range headers {
-		req.Header.Set(key, value)
-	}
-
 	if method == "POST" && headers["Content-Type"] == "" {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	}
+
+	for key, value := range headers {
+		req.Header.Set(key, value)
 	}
 
 	resp, err := client.Do(req)
