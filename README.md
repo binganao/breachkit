@@ -19,7 +19,7 @@ C:\Users\bingan\Desktop> breachkit.exe
 ![](https://github.com/binganao/breachkit/blob/main/breachkit.png?raw=true)
 
 ## 🐚 Options
-```Bash
+```python
 -np
   	Set all hosts to live [eg. -np]
   	设置所有主机为存活状态
